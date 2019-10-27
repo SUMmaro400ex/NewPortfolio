@@ -1,0 +1,49 @@
+body {
+    margin: 0 auto;
+    font-family: 'Inconsolata';
+}
+section#landing {
+    color: white;;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(0,122, 204,1) 0%, rgba(0,212,255,1) 100%);
+
+}
+section#landing h1 {
+    font-size: 60px;
+    margin: 0 auto;
+}
+section#landing div.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+section#landing i {
+    font-size: 64px;
+    cursor: pointer;
+}
+
+section#about-me {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    background: #ffb74d;
+    align-items: center;
+    color: white;
+}
+
+section#about-me img {
+    width: 50vw;
+    max-width: 500px
+}
+section#about-me h1 {
+    width: 70vw;
+    max-width: 700px
+}
+section#more {
+    height: 100vh;
+}
