@@ -46,7 +46,7 @@ section#about-me {
 
 section#about-me img {
     width: 50vw;
-    max-width: 500px
+    max-width: 500px;
 }
 section#about-me h1 {
     width: 70vw;
@@ -54,11 +54,16 @@ section#about-me h1 {
     text-align: center;
     margin-bottom: 100px;
 }
-
+@media only screen and (max-width: 1100px) {
+    section#about-me h1 {
+      font-size: 24px;
+    }
+}
 section#currentWork {
     font-family: 'Roboto Mono';
     padding-top: 24px;
-    height: 100vh;
+    height: fit-content;
+    min-height: 100vh;
     color: white;
     background: #ffb74d;
 }
@@ -80,7 +85,8 @@ section#currentWork img#computer {
     min-height: 300px;
 }
 section#currentWork img#CareCloud {
-    width: 350px;
+    max-width: 350px;
+    width: 90vw;
     margin-bottom: 50px;
 }
 
@@ -117,6 +123,20 @@ section#currentWork ul#techList {
         grid-template-columns: 1fr;
     }
 }
+@media only screen and (max-width: 500px) {
+    section#currentWork h4 {
+        font-size: 36px;
+    }
+    section#currentWork li h5 {
+        font-size: 18px;
+    }
+    section#currentWork p {
+        font-size: 14px;
+    }
+    section#currentWork ul#techList {
+        font-size: 14px;
+    }
+}
 
 section#contact {
     height: fit-content;
@@ -150,6 +170,16 @@ section#contact div#contactLinks img:hover {
 section#contact div#bye {
     text-align: center;
 }
+
+@media only screen and (max-width: 500px) {
+    section#contact div#contactLinks img  {
+      width: 80px;
+    }
+    section#contact div#bye img {
+        width: 200px;
+    }
+}
+
 div#credit {
     height: fit-content;
     background: rgb(43,43,43);

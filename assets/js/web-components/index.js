@@ -39,15 +39,6 @@ class LineTyper extends HTMLElement {
         }, randomVariability + 100);
     }
     render() {
-        const { innerWidth } = window;
-        const isMedium = innerWidth > 500 && innerWidth < 1000;
-        const isSmall = innerWidth <= 500;
-        let columns = 7;
-        if (isMedium) {
-            columns = 4;
-        } else if (isSmall) {
-            columns = 2;
-        }
         this.root.innerHTML = /*html*/`
                 <style>
                 .blink {
@@ -94,9 +85,19 @@ class LineTyper extends HTMLElement {
                 }
                 #resultsDiv {
                     display: grid;
-                    grid-template-columns: repeat(${columns}, 1fr);
+                    grid-template-columns: repeat(7, 1fr);
                     color: rgba(0,122, 204,1);
                     color: white;
+                }
+                @media only screen and (max-width: 1000px) {
+                    #resultsDiv {
+                        grid-template-columns: repeat(4, 1fr)
+                    }
+                }
+                @media only screen and (max-width: 500px) {
+                    #resultsDiv {
+                        grid-template-columns: repeat(2, 1fr)
+                    }
                 }
                 @keyframes blink {
                     from {
@@ -126,56 +127,56 @@ class LineTyper extends HTMLElement {
 }
 window.customElements.define('line-typer', LineTyper);
 
+
+const terminalLines = [
+    {
+        path: '~/Jon/Skills',
+        input: 'ls',
+        results: ['React', 'JavaScript', 'GraphQL', 'Node', 'HTML', 'CSS', 'SCSS', 'Web-Components', 'Ruby', 'Swift', 'SwiftUI'],
+    },
+    {
+        path: '~/Jon/Skills',
+        input: 'cd ..',
+        results: [],
+    },
+    {
+        path: '~/Jon',
+        input: 'ls',
+        results: ['Skills', 'Interests', 'My-Work'],
+    },
+    {
+        path: '~/Jon',
+        input: 'cd Interests',
+        results: [],
+    },
+    {
+        path: '~/Jon/Interests',
+        input: 'ls',
+        results: ['Code', 'Baseball', 'Cars', 'Technology', 'Games']
+    },
+    {
+        path: '~/Jon/Interests',
+        input: 'cd ..',
+        results: [],
+    },
+    {
+        path: '~/Jon',
+        input: 'cd My-Work',
+        results: [],
+    },
+    {
+        path: '~/Jon/My-Work',
+        input: 'ls',
+        results: ['Breeze_Web', 'Go', 'CareCloud', 'Edukit', 'Wyncode'],
+    },
+    {
+        path: '~/Jon/My-Work',
+        input: 'mkdir ??',
+        results: [],
+    },
+];
+
 class TerminalEmulator extends HTMLElement {
-    state = {
-        lines: [
-            {
-                path: '~/Jon/Skills',
-                input: 'ls',
-                results: ['React', 'JavaScript', 'GraphQL', 'Node', 'HTML', 'CSS', 'SCSS', 'Web-Components', 'Ruby', 'Swift', 'SwiftUI'],
-            },
-            {
-                path: '~/Jon/Skills',
-                input: 'cd ..',
-                results: [],
-            },
-            {
-                path: '~/Jon',
-                input: 'ls',
-                results: ['Skills', 'Interests', 'My-Work'],
-            },
-            {
-                path: '~/Jon',
-                input: 'cd Interests',
-                results: [],
-            },
-            {
-                path: '~/Jon/Interests',
-                input: 'ls',
-                results: ['Code', 'Baseball', 'Cars', 'Technology', 'Games']
-            },
-            {
-                path: '~/Jon/Interests',
-                input: 'cd ..',
-                results: [],
-            },
-            {
-                path: '~/Jon',
-                input: 'cd My-Work',
-                results: [],
-            },
-            {
-                path: '~/Jon/My-Work',
-                input: 'ls',
-                results: ['Breeze_Web', 'Go', 'CareCloud', 'Edukit', 'Wyncode'],
-            },
-            {
-                path: '~/Jon/My-Work',
-                input: 'mkdir ??',
-                results: [],
-            },
-        ],
-    };
     constructor() {
         super();
         this.root = this.attachShadow({ mode: 'open' });
@@ -186,18 +187,20 @@ class TerminalEmulator extends HTMLElement {
     }
 
     addLineTypers() {
-        if (!this.state.lines.length) return;
+        if (!terminalLines.length) return;
         const lineTyper = document.createElement('line-typer');
-        const { path, input, results } = this.state.lines.shift();
+        const { path, input, results } = terminalLines.shift();
         lineTyper.setAttribute('text', input);
         lineTyper.setAttribute('path', path);
-        const showBlinkingCaret = !this.state.lines.length;
+        const showBlinkingCaret = !terminalLines.length;
         showBlinkingCaret && lineTyper.setAttribute('showBlinkingCaret', true)
         lineTyper.properties = { onComplete: this.addLineTypers, results };
         this.root.querySelector('div#lineTypers').appendChild(lineTyper)
     }
 
     render() {
+        const { innerWidth } = window;
+        const isSmall = innerWidth < 1000;
         this.root.innerHTML = /*html*/`
             <style>
                 .wrapper {
@@ -216,6 +219,11 @@ class TerminalEmulator extends HTMLElement {
                     -webkit-box-shadow: 0px 0px 26px 3px rgba(0,0,0,0.2);
                     -moz-box-shadow: 0px 0px 26px 3px rgba(0,0,0,0.2);
                     box-shadow: 0px 0px 26px 3px rgba(0,0,0,0.2);
+                }
+                @media only screen and (max-width: 1000px) {
+                    .wrapper {
+                        width: 90vw;
+                    }
                 }
                 .close {
                     background-color: rgb(255, 87, 80);
