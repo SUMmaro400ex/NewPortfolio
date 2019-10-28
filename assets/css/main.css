@@ -2,6 +2,13 @@ body {
     margin: 0 auto;
     font-family: 'Inconsolata';
 }
+::-webkit-scrollbar {
+    display: none;
+}
+h1.heading {
+    text-align: center;
+    font-size: 60px;
+}
 section#landing {
     color: white;;
     display: flex;
@@ -16,7 +23,7 @@ section#landing h1 {
     font-size: 60px;
     margin: 0 auto;
 }
-section#landing div.intro {
+section#landing div#intro {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -31,9 +38,10 @@ section#about-me {
     display: flex;
     flex-direction: column;
     height: 80vh;
-    background: #ffb74d;
+    background: rgb(43,43,43);
     align-items: center;
     color: white;
+    font-family: 'Roboto Mono';
 }
 
 section#about-me img {
@@ -42,8 +50,110 @@ section#about-me img {
 }
 section#about-me h1 {
     width: 70vw;
-    max-width: 700px
+    font-size: 36px;
+    text-align: center;
 }
-section#more {
+
+section#currentWork {
+    font-family: 'Roboto Mono';
+    padding-top: 24px;
     height: 100vh;
+    color: white;
+    background: #ffb74d;
+}
+
+section#currentWork #detailsWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+section#currentWork div#details {
+    padding: 24px;
+}
+section#currentWork img#computer {
+    width: 50vw;
+    min-width: 700px;
+}
+section#currentWork img#computer {
+    height: 30vw;
+    min-height: 300px;
+}
+section#currentWork img#CareCloud {
+    width: 350px;
+    margin-bottom: 50px;
+}
+
+section#currentWork h4 {
+    font-size: 48px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+section#currentWork p {
+    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+section#currentWork li h5 {
+    font-size: 24px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+section#currentWork ul#techList {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 18px;
+}
+@media only screen and (max-width: 1100px) {
+    section#currentWork img#computer {
+      display: none;
+    }
+    section#currentWork #detailsWrapper{
+        grid-template-columns: 1fr;
+    }
+}
+
+section#contact {
+    height: fit-content;
+    padding-top: 24px;
+    color: white;
+    background: rgb(77, 175, 80);
+    /* background: linear-gradient(135deg, rgba(0,122, 204,1) 0%, rgba(0,212,255,1) 100%); */
+}
+section#contact h2 {
+    text-align: center;
+}
+section#contact div#contactLinks {
+    margin-top: 40px;
+    display: flex;
+    height: fit-content;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+section#contact div#contactLinks img {
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: all 0.6s;
+}
+
+section#contact div#contactLinks img:hover {
+    opacity: 1;
+}
+section#contact div#bye {
+    text-align: center;
+}
+div#credit {
+    height: fit-content;
+    background: rgb(43,43,43);
+    color: white
+}
+div#credit p {
+    margin: 0 auto;
 }
