@@ -140,12 +140,12 @@ class TerminalEmulator extends HTMLElement {
                 results: [],
             },
             {
-                path: '~',
+                path: '~/Jon',
                 input: 'ls',
                 results: ['Skills', 'Interests', 'My-Work'],
             },
             {
-                path: '~',
+                path: '~/Jon',
                 input: 'cd Interests',
                 results: [],
             },
@@ -160,7 +160,7 @@ class TerminalEmulator extends HTMLElement {
                 results: [],
             },
             {
-                path: '~',
+                path: '~/Jon',
                 input: 'cd My-Work',
                 results: [],
             },

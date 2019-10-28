@@ -37,7 +37,7 @@ section#landing i {
 section#about-me {
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: fit-content;
     background: rgb(43,43,43);
     align-items: center;
     color: white;
@@ -52,6 +52,7 @@ section#about-me h1 {
     width: 70vw;
     font-size: 36px;
     text-align: center;
+    margin-bottom: 100px;
 }
 
 section#currentWork {
