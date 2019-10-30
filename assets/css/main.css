@@ -15,7 +15,8 @@ section#landing {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     background: linear-gradient(135deg, rgba(0,122, 204,1) 0%, rgba(0,212,255,1) 100%);
 
 }
@@ -86,7 +87,7 @@ section#currentWork img#computer {
 }
 section#currentWork img#CareCloud {
     max-width: 350px;
-    width: 90vw;
+    width: 85vw;
     margin-bottom: 50px;
 }
 
@@ -115,9 +116,12 @@ section#currentWork ul#techList {
     grid-template-columns: 1fr 1fr;
     font-size: 18px;
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1300px) {
     section#currentWork img#computer {
       display: none;
+    }
+    div#credit {
+        display: none;
     }
     section#currentWork #detailsWrapper{
         grid-template-columns: 1fr;
@@ -143,7 +147,6 @@ section#contact {
     padding-top: 24px;
     color: white;
     background: rgb(77, 175, 80);
-    /* background: linear-gradient(135deg, rgba(0,122, 204,1) 0%, rgba(0,212,255,1) 100%); */
 }
 section#contact h2 {
     text-align: center;
@@ -173,7 +176,7 @@ section#contact div#bye {
 
 @media only screen and (max-width: 500px) {
     section#contact div#contactLinks img  {
-      width: 80px;
+        width: 80px;
     }
     section#contact div#bye img {
         width: 200px;

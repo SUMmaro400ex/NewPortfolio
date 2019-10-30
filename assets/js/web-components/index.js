@@ -210,7 +210,6 @@ class TerminalEmulator extends HTMLElement {
                     border-radius: 6px;
                     height: 40vh;
                     width: 60vw;
-                    min-width: 300px;
                     max-width: 1000px;
                     min-height: 500px;
                     padding: 14px;
