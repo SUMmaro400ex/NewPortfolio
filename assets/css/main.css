@@ -171,9 +171,24 @@ section#contact {
     padding-top: 24px;
     color: white;
     background: rgb(77, 175, 80);
+    display: flex;
+    flex-direction: column;
+    align-items: center
 }
 section#contact h2 {
     text-align: center;
+}
+section#contact div#resumeWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section#contact div#resumeWrapper h2 {
+    margin-right: 5px;
+}
+section#contact div#resumeWrapper i {
+    color: white;
+    font-size: 48px;
 }
 section#contact div#contactLinks {
     margin-top: 40px;
