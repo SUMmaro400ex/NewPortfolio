@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    font-family: 'Inconsolata';
+    font-family: 'Inconsolata', monospace;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -54,6 +54,19 @@ section#landing div#intro {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    animation: fadeIn 0.8s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 section#about-me {
