@@ -48,8 +48,10 @@ class LineTyper extends HTMLElement {
                     font-weight: 900;
                 }
                 .caret {
+                    margin-top: -2px;
                     margin-left: -4px;
                     font-size: 18px;
+                    font-weight: 900;
                     color: rgb(44 207 66);
                 }
                 .hide {

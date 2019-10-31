@@ -9,6 +9,31 @@ h1.heading {
     text-align: center;
     font-size: 60px;
 }
+
+div.iconWrapper {
+    position: relative;
+    align-self: center;
+    height: 100px;
+    width: 64px;
+}
+div.iconWrapper i {
+    font-size: 64px;
+    cursor: pointer;
+    position: absolute;
+    animation: animateDown 1.25s infinite;
+}
+
+@keyframes animateDown {
+    from {
+        opacity: 0;
+        bottom: 40px;
+    }
+    to {
+        opacity: 1;
+        bottom: 10px;
+    }
+}
+
 section#landing {
     color: white;;
     display: flex;
@@ -29,10 +54,6 @@ section#landing div#intro {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-}
-section#landing i {
-    font-size: 64px;
-    cursor: pointer;
 }
 
 section#about-me {
@@ -67,6 +88,9 @@ section#currentWork {
     min-height: 100vh;
     color: white;
     background: #ffb74d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 section#currentWork #detailsWrapper{
