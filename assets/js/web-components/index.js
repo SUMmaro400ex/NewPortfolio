@@ -7,12 +7,18 @@ class LineTyper extends HTMLElement {
         this.render();
     }
     static get observedAttributes() {
+        // These attributes arent't available during initialization
+        // So we must watch for their change to update
         return ['text', 'path'];
     }
     attributeChangedCallback(name, oldValue, newValue) {
+        // Confirm the value has changed
         if (oldValue === newValue) return;
         if (name === 'text') {
+            // Set the textArray which will be used to "type" each line
             this.textArray = newValue.split('');
+            // Wait 1500ms before starting the "typing"
+            // Adds a realistic pause
             setTimeout(this.typeNextLetter, 1500);
         } else {
             this.root.getElementById('pathName').innerHTML = `&nbsp;${newValue}&nbsp;`;
@@ -20,21 +26,28 @@ class LineTyper extends HTMLElement {
 
     }
     typeNextLetter() {
+        // Get the next letter in the textArray
         const nextLetter = this.textArray.shift();
+        // Create a random offset for typing. This adds between 0 to 200ms to "type" each letter
         const randomVariability = Math.random() * 200;
         setTimeout(_ => {
+            // Append the next letter to the current value
             this.root.getElementById('textLine').innerHTML = this.root.getElementById('textLine').innerHTML + nextLetter;
             // If this is the final letter
             if (!this.textArray[0]) {
+                // The last line needs to keep the caret visible and blinking
+                // If this is not the last line, hide the caret
                 const className = this.hasAttribute('showBlinkingCaret') ? 'blink' : 'hide'
                 this.root.getElementById('caret').className = `${className} caret`;
                 // Insert pause to mock computer processing request
                 return setTimeout(_ => {
-                    this.root.getElementById('resultsDiv').innerHTML = (this.properties.results || []).map(result => `<div>${result}</div>`).join('');
                     // View results before typing next line
+                    this.root.getElementById('resultsDiv').innerHTML = (this.properties.results || []).map(result => `<div>${result}</div>`).join('');
+                    // Call onCompleteCallback to signal the next line to start
                     this.properties.onComplete && this.properties.onComplete();
                 }, 300)
             }
+            // If this is not the last letter, recursively call this function to type the next letter
             this.typeNextLetter();
         }, randomVariability + 100);
     }
@@ -80,7 +93,7 @@ class LineTyper extends HTMLElement {
                 #arrow-blue {
                     width: 0; 
                     height: 0; 
-                    border-top: 10px solid transparent;
+                    border-top: 11px solid transparent;
                     border-bottom: 10px solid transparent;
                     border-left: 12px solid rgba(0,122, 204,1);
                     background: rgb(43,43,43);
@@ -189,23 +202,42 @@ class TerminalEmulator extends HTMLElement {
     }
 
     addLineTypers() {
+        // If there are no more line to "type", return
         if (!terminalLines.length) return;
+        // Create a line-typer element (defined above)
         const lineTyper = document.createElement('line-typer');
+        // get the next line to type from the terminalLines array
         const { path, input, results } = terminalLines.shift();
+        // Set the text and path attributes
         lineTyper.setAttribute('text', input);
         lineTyper.setAttribute('path', path);
+        // If this is the last line, set the showBlinkingCaret attribute
         const showBlinkingCaret = !terminalLines.length;
         showBlinkingCaret && lineTyper.setAttribute('showBlinkingCaret', true)
+        // Set the onComplete property to recursively call this function
+        // Set the results property to the results for this line
         lineTyper.properties = { onComplete: this.addLineTypers, results };
-        this.root.querySelector('div#lineTypers').appendChild(lineTyper)
+        // Insert the line-typer
+        const lineTypersDiv = this.root.querySelector('div#lineTypers');
+        lineTypersDiv.appendChild(lineTyper)
+        // Scroll the lines to bottom
+        lineTypersDiv.scrollTop = lineTypersDiv.scrollHeight;
     }
 
     render() {
-        const { innerWidth } = window;
-        const isSmall = innerWidth < 1000;
         this.root.innerHTML = /*html*/`
             <style>
+                ::-webkit-scrollbar {
+                    width: 8px;
+                    background-color: rgb(43, 43, 43);
+                }
+                ::-webkit-scrollbar-thumb {
+                    background-color: white;
+                    width: 4px;
+                    border-radius: 4px;
+                }
                 .wrapper {
+                    overflow: hidden;
                     animation: appear ease-out 0.8s;
                     color: white;
                     background-color: rgb(43,43,43);
@@ -252,6 +284,11 @@ class TerminalEmulator extends HTMLElement {
                     position: absolute;
                     top: 10px;
                     left: 40px;
+                }
+                #lineTypers {
+                    overflow-y: scroll;
+                    height: 100%;
+                    scrollbar-color: white rgb(43,43,43);
                 }
                 @keyframes appear {
                     0% {
